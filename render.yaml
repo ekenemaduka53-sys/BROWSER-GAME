@@ -1,0 +1,17 @@
+# Render Blueprint: deploys the Socket.IO leaderboard server from the server/ folder.
+# In Render: New > Blueprint > pick this repository.
+services:
+  - type: web
+    name: slither-garden-leaderboard
+    runtime: node
+    rootDir: server
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      # Your Vercel URL, e.g. https://slither-garden.vercel.app (you'll be asked for it)
+      - key: CLIENT_ORIGIN
+        sync: false
